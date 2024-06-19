@@ -1,0 +1,13 @@
+Patch Source: https://svn.apache.org/viewvc/spamassassin/trunk/t/sa_txrep.t?r1=1916985&r2=1916984&pathrev=1916985&view=patch
+Upstream Bug: https://bz.apache.org/SpamAssassin/show_bug.cgi?id=8238
+--- a/trunk/t/sa_txrep.t
++++ b/trunk/t/sa_txrep.t
+@@ -88,7 +88,7 @@
+   txrep_weight_email 10
+   $rules
+ ");
+-unlink("./$userstate/txreptest");
++unlink("./$userstate/txreptest", "./$userstate/txreptest.pag", "./$userstate/txreptest.dir");
+ 
+ %txrep_pattern0 = (
+   q{ 0.0 TXREP } => 'Score normalizing',
