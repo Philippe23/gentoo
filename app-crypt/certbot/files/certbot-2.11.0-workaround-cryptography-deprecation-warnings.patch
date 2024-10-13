@@ -1,7 +1,7 @@
 https://github.com/certbot/certbot/issues/9967
 https://bugs.gentoo.org/937889
---- a/certbot/ocsp.py
-+++ b/certbot/ocsp.py
+--- a/certbot/certbot/ocsp.py
++++ b/certbot/certbot/ocsp.py
 @@ -4,6 +4,7 @@ from datetime import timedelta
  import logging
  import re
@@ -10,7 +10,15 @@ https://bugs.gentoo.org/937889
  from subprocess import PIPE
  from typing import Optional
  from typing import Tuple
-@@ -235,12 +236,17 @@ def _check_ocsp_response(response_ocsp: 'ocsp.OCSPResponse', request_ocsp: 'ocsp
+@@ -14,6 +15,7 @@ from cryptography.exceptions import UnsupportedAlgorithm
+ from cryptography.hazmat.backends import default_backend
+ from cryptography.hazmat.primitives import hashes
+ from cryptography.hazmat.primitives import serialization
++from cryptography.utils import CryptographyDeprecationWarning
+ from cryptography.x509 import ocsp
+ import pytz
+ import requests
+@@ -235,12 +237,17 @@ def _check_ocsp_response(response_ocsp: 'ocsp.OCSPResponse', request_ocsp: 'ocsp
      # https://github.com/openssl/openssl/blob/ef45aa14c5af024fcb8bef1c9007f3d1c115bd85/crypto/ocsp/ocsp_cl.c#L338-L391
      # thisUpdate/nextUpdate are expressed in UTC/GMT time zone
      now = datetime.now(pytz.UTC).replace(tzinfo=None)
